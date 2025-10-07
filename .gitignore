@@ -5,6 +5,7 @@ __pycache__/
 
 #pastas com dados sensíveis
 dados_saida
+dados_entrada
 
 # C extensions
 *.so
