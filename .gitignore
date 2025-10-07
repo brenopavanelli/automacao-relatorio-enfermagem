@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+#pastas com dados sensíveis
+dados_saida
+
 # C extensions
 *.so
 
