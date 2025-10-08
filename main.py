@@ -12,6 +12,18 @@ def carregar_dados(pasta, arquivo):
         print(f"Erro: O arquivo não foi encontrado no caminho: {caminho_do_arquivo}")
         return None
 
+def delete_columns(df):
+    columns_to_remove = ['ParCalc', 'DescrParCalc', 'Qtde_Total', 'Valor_Total']
+
+    clean_df = df.drop(columns=columns_to_remove)
+
+    print(f"Columns '{', '.join(columns_to_remove)}' successfully removed!")
+
+    return clean_df
+
+
 if __name__ == "__main__":
     dataframe = carregar_dados('dados_entrada', 'entrada.csv')
-    print(dataframe)
+    cleaned_df = delete_columns(dataframe)
+
+    print(cleaned_df)
