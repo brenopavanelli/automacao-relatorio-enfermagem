@@ -1,15 +1,15 @@
 import pandas as pd
 import os
 
-def carregar_dados(pasta, arquivo):
-    caminho_do_arquivo = os.path.join(pasta, arquivo)
+def load_data(pasta, arquivo):
+    path = os.path.join(pasta, arquivo)
 
     try:
-        df = pd.read_csv(str(caminho_do_arquivo), sep=';')
-        print("Arquivo CSV carregado com sucesso!")
+        df = pd.read_csv(str(path), sep=';')
+        print("CSV file uploaded successfully!")
         return df
     except FileNotFoundError:
-        print(f"Erro: O arquivo não foi encontrado no caminho: {caminho_do_arquivo}")
+        print(f"Error: The file was not find in the path: {path}")
         return None
 
 def delete_columns(df):
@@ -23,7 +23,7 @@ def delete_columns(df):
 
 
 if __name__ == "__main__":
-    dataframe = carregar_dados('dados_entrada', 'entrada.csv')
+    dataframe = load_data('dados_entrada', 'entrada.csv')
     cleaned_df = delete_columns(dataframe)
 
     print(cleaned_df)
