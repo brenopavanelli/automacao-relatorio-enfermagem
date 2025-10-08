@@ -21,9 +21,28 @@ def delete_columns(df):
 
     return clean_df
 
+def columns_rename(df):
+    map = {
+        'Matricula': 'MATRÍCULA',
+        'Cpf': 'CPF',
+        'Nome_Completo': 'NOME DO FUNCIONÁRIO',
+        'Des_LocalTrab': 'LOCAL DE TRABALHO',
+        'Des_Cargo': 'CARGO',
+        'CBO': 'CBO',
+        'Resc': 'ATV (NOME DO MES)',
+        'HrSem': 'JORN. SEMANAL',
+        'VB001_Valor': 'SALARIO BASE'
+    }
+
+    new_df = df.rename(columns=map)
+
+    return new_df
+
+
 
 if __name__ == "__main__":
     dataframe = load_data('dados_entrada', 'entrada.csv')
     cleaned_df = delete_columns(dataframe)
+    df_renamed = columns_rename(cleaned_df)
 
-    print(cleaned_df)
+    print(df_renamed)
