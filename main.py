@@ -29,7 +29,7 @@ def columns_rename(df):
         'Des_LocalTrab': 'LOCAL DE TRABALHO',
         'Des_Cargo': 'CARGO',
         'CBO': 'CBO',
-        'Resc': 'ATV (NOME DO MES)',
+        'Resc': 'ATV',
         'HrSem': 'JORN. SEMANAL',
         'VB001_Valor': 'SALARIO BASE'
     }
@@ -44,10 +44,16 @@ def sort_data(df):
 
     return new_df
 
+def update_atv(df):
+    df['ATV'] = df['ATV'].replace('Nao', 'Sim')
+    print('The values in the "ATV" column have been updated')
+
+
 if __name__ == "__main__":
     dataframe = load_data('dados_entrada', 'entrada.csv')
     cleaned_df = delete_columns(dataframe)
     renamed_df = columns_rename(cleaned_df)
-    ordered_df = sort_data(renamed_df)
+    sorted_df = sort_data(renamed_df)
+    update_atv(sorted_df)
 
-    print(ordered_df)
+    print(sorted_df['ATV'])
