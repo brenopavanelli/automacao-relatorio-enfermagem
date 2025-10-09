@@ -38,9 +38,9 @@ def columns_rename(df):
 
     return new_df
 
-def order_data(df):
+def sort_data(df):
     new_df = df.sort_values(by='NOME DO FUNCIONÁRIO')
-    print('DataFrame orderd by "NOME DO FUNCIONÁRIO"')
+    print('DataFrame sorted by "NOME DO FUNCIONÁRIO"')
 
     return new_df
 
@@ -48,6 +48,6 @@ if __name__ == "__main__":
     dataframe = load_data('dados_entrada', 'entrada.csv')
     cleaned_df = delete_columns(dataframe)
     renamed_df = columns_rename(cleaned_df)
-    ordered_df = order_data(renamed_df)
+    ordered_df = sort_data(renamed_df)
 
     print(ordered_df)
