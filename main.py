@@ -13,15 +13,17 @@ def load_data(pasta, arquivo):
         return None
 
 def delete_columns(df):
+    df_copy = df.copy()
     columns_to_remove = ['ParCalc', 'DescrParCalc', 'Qtde_Total', 'Valor_Total']
 
-    new_df = df.drop(columns=columns_to_remove)
+    df_copy = df_copy.drop(columns=columns_to_remove)
 
     print(f"Columns '{', '.join(columns_to_remove)}' successfully removed!")
 
-    return new_df
+    return df_copy
 
 def columns_rename(df):
+    df_copy = df.copy()
     map = {
         'Matricula': 'MATRÍCULA',
         'Cpf': 'CPF',
@@ -34,26 +36,36 @@ def columns_rename(df):
         'VB001_Valor': 'SALARIO BASE'
     }
 
-    new_df = df.rename(columns=map)
+    df_copy = df_copy.rename(columns=map)
 
-    return new_df
+    print("Columns have been renamed!")
+
+    return df_copy
 
 def sort_data(df):
-    new_df = df.sort_values(by='NOME DO FUNCIONÁRIO')
+    df_copy = df.copy()
+    df_copy = df_copy.sort_values(by='NOME DO FUNCIONÁRIO')
     print('DataFrame sorted by "NOME DO FUNCIONÁRIO"')
 
-    return new_df
+    return df_copy
 
 def update_atv(df):
-    df['ATV'] = df['ATV'].replace('Nao', 'Sim')
-    print('The values in the "ATV" column have been updated')
+    df_copy = df.copy()
+    df_copy['ATV'] = df_copy['ATV'].replace('Não', 'Sim')
+    print('The values in the "ATV (NOME DO MES)" column have been updated')
+    return df_copy
 
 
 if __name__ == "__main__":
-    dataframe = load_data('dados_entrada', 'entrada.csv')
-    cleaned_df = delete_columns(dataframe)
-    renamed_df = columns_rename(cleaned_df)
-    sorted_df = sort_data(renamed_df)
-    update_atv(sorted_df)
+    dataframe = load_data('dados_amostra', 'fonte_exemplo.csv')
 
-    print(sorted_df['ATV'])
+    if dataframe is not None:
+        dataframe = delete_columns(dataframe)
+        dataframe = columns_rename(dataframe)
+        dataframe = sort_data(dataframe)
+        update_atv(dataframe)
+        print("\n--- DataFrame Final ---")
+        print(dataframe.head())
+        print(dataframe['NOME DO FUNCIONÁRIO'], dataframe['ATV'],  dataframe['SALARIO BASE'])
+    else:
+        print('Error!')
