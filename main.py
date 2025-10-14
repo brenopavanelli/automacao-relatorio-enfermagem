@@ -55,6 +55,17 @@ def update_atv(df):
     print('The values in the "ATV (NOME DO MES)" column have been updated')
     return df_copy
 
+def insert_columns(df):
+    df_copy = df.copy()
+
+    df_copy['VANTAGENS DE CARÁTER FIXO'] = 0
+    df_copy['VANTAGENS VARIAVEIS'] = 0
+    df_copy['AD. NOTURNO'] = 0
+    df_copy['INSALUBRIDADE'] = 0
+
+    print("Columns add successfully!")
+    return df_copy
+
 
 if __name__ == "__main__":
     dataframe = load_data('dados_amostra', 'fonte_exemplo.csv')
@@ -63,9 +74,11 @@ if __name__ == "__main__":
         dataframe = delete_columns(dataframe)
         dataframe = columns_rename(dataframe)
         dataframe = sort_data(dataframe)
-        update_atv(dataframe)
-        print("\n--- DataFrame Final ---")
+        dataframe = update_atv(dataframe)
+        dataframe = insert_columns(dataframe)
+
+        print("\n--- DataFrame ---")
         print(dataframe.head())
-        print(dataframe['NOME DO FUNCIONÁRIO'], dataframe['ATV'],  dataframe['SALARIO BASE'])
+
     else:
         print('Error!')
